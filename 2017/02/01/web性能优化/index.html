@@ -113,7 +113,7 @@ CSS sprite
 解决办法：增加浏览器同时请求资源的数量
 可以把资源放在不同的服务器上(域名)
 针对不同地区的人使用不同的服务器(DNS服务器根据USER自身的IP地址分配一个离他最近的服务器IP地址)">
-<meta property="og:updated_time" content="2017-02-15T15:05:12.140Z">
+<meta property="og:updated_time" content="2017-02-15T15:07:37.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web性能优化">
 <meta name="twitter:description" content="网络层
@@ -423,11 +423,14 @@ CSS sprite
 <li>6-8，一般情况下同一个域名下同时只能建立6-8个连接</li>
 <li>解决办法：增加浏览器同时请求资源的数量<ul>
 <li>可以把资源放在不同的服务器上(域名)</li>
-<li>针对不同地区的人使用不同的服务器(DNS服务器根据USER自身的IP地址分配一个离他最近的服务器IP地址)<a id="more"></a></li>
+<li>针对不同地区的人使用不同的服务器(DNS服务器根据USER自身的IP地址分配一个离他最近的服务器IP地址)</li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>使用缓存<ul>
 <li>各种不同的缓存类型<ul>
 <li>IF -Modified-Since</li>
@@ -603,7 +606,7 @@ CSS sprite
 
           
  <!-- 多说评论框 start -->
-   <div class="ds-thread" data-thread-key="<%- page.path %>" data-title="<%- page.title %>" data-url="<%- page.permalink %>"></div>
+   <div class="ds-thread" data-thread-key="<%= post.layout %>-<%= post.slug %>" data-title="<%= post.title %>" data-url="<%= page.permalink %>"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -611,7 +614,7 @@ var duoshuoQuery = {short_name:"alrsus"};
   (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
     ds.charset = 'UTF-8';
     (document.getElementsByTagName('head')[0] 
      || document.getElementsByTagName('body')[0]).appendChild(ds);
