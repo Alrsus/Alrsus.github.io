@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -103,7 +103,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -209,6 +209,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
@@ -225,6 +235,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -632,6 +652,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/知识梳理/" itemprop="url" rel="index">
+                    <span itemprop="name">知识梳理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -668,8 +710,7 @@
 
       
         
-          
-            <h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><ul>
+          <h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><ul>
 <li>减少http请求<ul>
 <li>合并请求</li>
 <li>CSS sprite</li>
@@ -679,98 +720,14 @@
 <li>6-8，一般情况下同一个域名下同时只能建立6-8个连接</li>
 <li>解决办法：增加浏览器同时请求资源的数量<ul>
 <li>可以把资源放在不同的服务器上(域名)</li>
-<li>针对不同地区的人使用不同的服务器(DNS服务器根据USER自身的IP地址分配一个离他最近的服务器IP地址)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>使用缓存<ul>
-<li>各种不同的缓存类型<ul>
-<li>IF -Modified-Since</li>
-<li>Last-modified</li>
-<li>Expiress</li>
-<li>Cache-Control</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>压缩<ul>
-<li>在HTTP连接上使用gzip压缩</li>
-</ul>
-</li>
-</ul>
-<h3 id="页面层"><a href="#页面层" class="headerlink" title="页面层"></a>页面层</h3><ul>
-<li>将CSS放在页面的顶部<ul>
-<li>把CSS直接内联到页面里</li>
-<li>只渲染首屏CSS</li>
-<li>多段式Link标签</li>
-</ul>
-</li>
-<li>将JS放在底部<ul>
-<li>js的下载和运行都会阻塞、暂停页面的解析和渲染</li>
-<li>解析：解析HTML并构建DOM树</li>
-<li>渲染：把页面画在页面上</li>
-<li>阻塞的原因<ul>
-<li>单线程</li>
-<li>运行js和渲染页面是同一个线程</li>
-<li>js的代码有可能是操作DOM的，所以必须等DOM渲染出来 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>避免CSS表达式</li>
-<li>使用外部JS和CSS文件<ul>
-<li>因为多个页面使用同一个文件时，缓存会起作用</li>
-</ul>
-</li>
-<li>分散域名 </li>
-<li>提前解析DNS ，dns-prefetch </li>
-<li>精简js<ul>
-<li>混淆，minifiy<ul>
-<li>去掉多余的空格，注释，换行，混淆代码</li>
-<li>Uglifyjs</li>
-<li>减少体积，保护知识产权</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>避免重定向<ul>
-<li>响应头：</li>
-<li>避免30X请求，除缓存</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">HTTP / <span class="number">1.1</span> <span class="number">302</span> Removed Temp</div><div class="line">Location :c.html/a.tml</div></pre></td></tr></table></figure>
-<ul>
-<li>移除重复脚本</li>
-<li>配置Etag<ul>
-<li>Etag是一个http头，类似于文件hash</li>
-<li>一般来说如果服务器检测到相同，就可以回复一个304请求</li>
-<li>不同的机器，HTTP服务器(apache)的默认配置<ul>
-<li>会导致相同的文件在 不同的机器上返回不同的Etag头</li>
-<li>是ajax可缓存</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>把资源放在localStorage里</p>
-<ul>
-<li>imququ.com</li>
-</ul>
-</li>
-<li><p>HTTP2</p>
-<ul>
-<li>iHover -&gt; Youtube -&gt; HTTP2视频</li>
-<li>强制要求走HTTPS<ul>
-<li>HTTPS需要证书</li>
-<li>证书需要找相应的CA机构去买</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          
+<li>针对不同地区的人使用不同的服务器(DNS服务器根据USER自身的IP地址分配一个离他最近的服务器IP地址)
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/01/web性能优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -850,7 +807,21 @@
           
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -922,7 +893,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
@@ -990,6 +961,13 @@
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
   
 
   
@@ -1048,6 +1026,7 @@
 
   
 
+<script type="text/javascript" src="/js/src/particle.js"></script>
 
 </body>
 </html>
