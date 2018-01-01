@@ -478,8 +478,7 @@
 
       
         
-          
-            <h3 id="闭包是怎样出现的？"><a href="#闭包是怎样出现的？" class="headerlink" title="闭包是怎样出现的？"></a>闭包是怎样出现的？</h3><ul>
+          <h3 id="闭包是怎样出现的？"><a href="#闭包是怎样出现的？" class="headerlink" title="闭包是怎样出现的？"></a>闭包是怎样出现的？</h3><ul>
 <li>闭包其实是一种作用域，</li>
 <li>因为js的作用域有两种。全局作用域，块级作用域。</li>
 <li>js中函数内部可以访问函数外部的变量，函数外部不可以访问函数内部的变量</li>
@@ -487,41 +486,13 @@
 <li>这个原函数相对新函数来说，他的所有变量，对新函数都是可见的。我们可以通过子函数实现对新函数的访问。</li>
 <li>函数内部如果不用var操作符来声明变量，则该变量就是全局变量。</li>
 </ul>
-<h3 id="因此可以一句话概括"><a href="#因此可以一句话概括" class="headerlink" title="因此可以一句话概括"></a>因此可以一句话概括</h3><ul>
-<li>闭包(closure)：创建一个平行空间，能够读取其他函数内部变量的函数。</li>
-</ul>
-<h3 id="我们先创建一个闭包"><a href="#我们先创建一个闭包" class="headerlink" title="我们先创建一个闭包"></a>我们先创建一个闭包</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> n=<span class="number">999</span>;</span><br><span class="line">　　　　<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　alert(n); </span><br><span class="line">　　　　&#125;</span><br><span class="line">　　　　<span class="keyword">return</span> f2;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">var</span> result=f1();</span><br><span class="line">　　result(); <span class="comment">// 999</span></span><br></pre></td></tr></table></figure>
-<p> f1 其实就是一个闭包</p>
-<ul>
-<li><p>怎样去理解闭包呢？</p>
-</li>
-<li><p><strong>eg1</strong></p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">　<span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line">　　<span class="keyword">var</span> object = &#123;</span><br><span class="line">　　　　name : <span class="string">"My Object"</span>,</span><br><span class="line">　　　　getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　　　<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">　　　　　　&#125;;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;;</span><br><span class="line">　　alert(object.getNameFunc()());﻿​</span><br></pre></td></tr></table></figure>
-<ul>
-<li>调用object.getNameFunc()返回函数：</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">　　&#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>此时该函数的外部作用域为全局，this指向全局(window),所以继续调用返回the.window.</p>
-</li>
-<li><p><strong>eg2</strong></p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line">　　<span class="keyword">var</span> object = &#123;</span><br><span class="line">　　　　name : <span class="string">"My Object"</span>,</span><br><span class="line">　　　　getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　<span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　　　<span class="keyword">return</span> that.name;</span><br><span class="line">　　　　　　&#125;;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;;</span><br><span class="line">　　alert(object.getNameFunc()());﻿​</span><br></pre></td></tr></table></figure>
-<p>第一次执行同样返回一个全局函数。该函数并不会被销毁，而是作为全局的一个方法存在。但是该函数又依赖函数函数f1.因此f1也没有被销毁。that指向f1.所有继续调用返回f1</p>
-<ul>
-<li><strong>eg3</strong></li>
-</ul>
-<p>同样。作为一个闭包。f2也可以这样返回。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"The Window"</span>;</span><br><span class="line">　　<span class="keyword">var</span> object = &#123;</span><br><span class="line">　　　　name : <span class="string">"My Object"</span>,</span><br><span class="line">　　　　getNameFunc : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　　　　　<span class="keyword">return</span> object.name;</span><br><span class="line">　　　　　　&#125;;</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;;</span><br><span class="line">　　alert(object.getNameFunc()());﻿​</span><br><span class="line">　　<span class="comment">//=&gt;"My Object"</span></span><br></pre></td></tr></table></figure>
-<h3 id="闭包有哪些用？"><a href="#闭包有哪些用？" class="headerlink" title="闭包有哪些用？"></a>闭包有哪些用？</h3><ul>
-<li>一般说来，可以使用只有一个方法的对象的地方，都可以使用闭包。所以可以利用闭包实现面向对象的编程，也就是说可以实现出 类似于 构造出一个对象，为其增加一些方法的功能。</li>
-</ul>
-<p>参考链接 ：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/20/闭包/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
